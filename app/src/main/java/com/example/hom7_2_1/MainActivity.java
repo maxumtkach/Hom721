@@ -27,14 +27,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                String stringValue = editText.getText().toString();
                 Intent intentSearch = new Intent(Intent.ACTION_VIEW);
 
+                char c = stringValue.charAt(0);
+
+
                 if (intentSearch.resolveActivity(getPackageManager()) != null) {
-                    if (Character.isLetter('t')) {
-                        Uri uriGeoAddress = Uri.parse("geo:?q=" + editText.getText().toString());
+                    if (Character.isLetter(c)) {
+                        Uri uriGeoAddress = Uri.parse("geo:?q=" + stringValue);
                         intentSearch.setData(uriGeoAddress);
                     } else {
-                        Uri uriGeo = Uri.parse("geo:" + editText.getText().toString());
+                        Uri uriGeo = Uri.parse("geo:" + stringValue);
                         intentSearch.setData(uriGeo);
                     }
 

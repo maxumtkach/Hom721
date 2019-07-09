@@ -9,12 +9,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     private EditText editText;
-    private Button button;
     private final static String TAG = "Intent";
+    private Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,15 +30,14 @@ public class MainActivity extends AppCompatActivity {
                 String stringValue = editText.getText().toString();
                 Intent intentSearch = new Intent(Intent.ACTION_VIEW);
 
-                    if (intentSearch.resolveActivity(getPackageManager()) != null) {
-                    if (Character.isLetter('T')) {
+                if (intentSearch.resolveActivity(getPackageManager()) != null) {
+                    if (Character.isLetter('T')) { //определяет является буквой
                         Uri uriGeoAddress = Uri.parse("geo:?q=" + stringValue);
                         intentSearch.setData(uriGeoAddress);
-                    } else {
+                    } else if (Character.isDigit('0')) {  //определяет является цифрой
                         Uri uriGeo = Uri.parse("geo:" + stringValue);
                         intentSearch.setData(uriGeo);
                     }
-
                     startActivity(intentSearch);
                 } else {
                     Log.d(TAG, "Browser not found");

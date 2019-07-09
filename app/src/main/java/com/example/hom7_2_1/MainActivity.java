@@ -26,15 +26,11 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String stringValue = editText.getText().toString();
                 Intent intentSearch = new Intent(Intent.ACTION_VIEW);
 
-                char c = stringValue.charAt(0);
-
-
-                if (intentSearch.resolveActivity(getPackageManager()) != null) {
-                    if (Character.isLetter(c)) {
+                    if (intentSearch.resolveActivity(getPackageManager()) != null) {
+                    if (Character.isLetter('T')) {
                         Uri uriGeoAddress = Uri.parse("geo:?q=" + stringValue);
                         intentSearch.setData(uriGeoAddress);
                     } else {

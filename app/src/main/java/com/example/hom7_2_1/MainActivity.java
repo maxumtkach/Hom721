@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     private EditText editText;
@@ -28,13 +30,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String stringValue = editText.getText().toString();
+
                 Intent intentSearch = new Intent(Intent.ACTION_VIEW);
 
                 if (intentSearch.resolveActivity(getPackageManager()) != null) {
-                    if (Character.isLetter('T')) { //определяет является буквой
+                    char value =0;
+
+                    for (int i = 0; i < stringValue.length(); i++) {
+                        value = stringValue.toCharArray()[i];
+                    }
+
+                    if (Character.isLetter(value)) { //определяет является буквой
                         Uri uriGeoAddress = Uri.parse("geo:?q=" + stringValue);
                         intentSearch.setData(uriGeoAddress);
-                    } else if (Character.isDigit('0')) {  //определяет является цифрой
+                    } else {  //определяет является цифрой
                         Uri uriGeo = Uri.parse("geo:" + stringValue);
                         intentSearch.setData(uriGeo);
                     }

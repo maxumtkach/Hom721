@@ -34,16 +34,11 @@ public class MainActivity extends AppCompatActivity {
                 Intent intentSearch = new Intent(Intent.ACTION_VIEW);
 
                 if (intentSearch.resolveActivity(getPackageManager()) != null) {
-                    char value =0;
 
-                    for (int i = 0; i < stringValue.length(); i++) {
-                        value = stringValue.toCharArray()[i];
-                    }
-
-                    if (Character.isLetter(value)) { //определяет является буквой
+                    if (isAlpha(stringValue)) { //определяет является буквой
                         Uri uriGeoAddress = Uri.parse("geo:?q=" + stringValue);
                         intentSearch.setData(uriGeoAddress);
-                    } else {  //определяет является цифрой
+                    } else {  //поиск по координате
                         Uri uriGeo = Uri.parse("geo:" + stringValue);
                         intentSearch.setData(uriGeo);
                     }
@@ -53,7 +48,18 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
 
+    // -----------------  ф-ия опр.  буквы в строке
+    public boolean isAlpha(String name) {
+        char[] chars = name.toCharArray();
+
+        for (char c : chars) {
+            if (Character.isLetter(c)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void initView() {
